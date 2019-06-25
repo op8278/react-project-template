@@ -1,20 +1,26 @@
 // Do this as the first thing so that any code reading it knows the right env.
-process.env.BABEL_ENV = 'development'
-process.env.NODE_ENV = 'development'
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 process.on('unhandledRejection', err => {
-  throw err
-})
+  throw err;
+});
 
-const webpack = require('webpack')
-const webpackMerge = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const webpackBaseConfig = require('./webpack.base.config.js')
-const { r } = require('./util')
+const webpackBaseConfig = require('./webpack.base.config.js');
+const { r, getStyleLoaders } = require('./util');
+
+// style files regexes
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 
 const webpackConfig = webpackMerge(webpackBaseConfig, {
   mode: 'development',
@@ -58,6 +64,43 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
     }, // 404退回首页
     open: true, // 打开浏览器
   },
-})
+});
 
-module.exports = webpackConfig
+webpackConfig.module.rules = webpackConfig.module.rules.concat([
+  // css的loader
+  {
+    test: cssRegex,
+    exclude: cssModuleRegex,
+    use: getStyleLoaders(
+      {
+        importLoaders: 1,
+        sourceMap: true,
+        modules: true,
+      },
+      null,
+      true
+    ),
+    // Don't consider CSS imports dead code even if the
+    // containing package claims to have no side effects.
+    // Remove this when webpack adds a warning or an error for this.
+    // See https://github.com/webpack/webpack/issues/6571
+    sideEffects: true,
+  },
+  // less的loader
+  {
+    test: lessRegex,
+    exclude: lessModuleRegex,
+    use: getStyleLoaders(
+      {
+        importLoaders: 2,
+        sourceMap: true,
+        modules: true,
+      },
+      'less-loader',
+      true
+    ),
+    sideEffects: true,
+  },
+]);
+
+module.exports = webpackConfig;

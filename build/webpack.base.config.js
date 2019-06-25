@@ -1,4 +1,4 @@
-const { r } = require('./util')
+const { r } = require('./util');
 
 const webpackConfig = {
   // 输出文件
@@ -37,6 +37,7 @@ const webpackConfig = {
   // 资源加载loader
   module: {
     rules: [
+      // babel的loader
       {
         test: /\.(jsx|js)$/,
         loader: 'babel-loader',
@@ -45,5 +46,5 @@ const webpackConfig = {
       },
     ],
   },
-}
-module.exports = webpackConfig
+};
+module.exports = webpackConfig;
