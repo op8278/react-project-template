@@ -1,0 +1,19 @@
+{
+  "name": "react-project-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/op8278/react-project-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/op8278/react-project-template/issues"
+  },
+  "homepage": "https://github.com/op8278/react-project-template#readme"
+}
