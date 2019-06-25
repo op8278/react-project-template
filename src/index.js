@@ -1,5 +1,8 @@
-import { test } from '@util';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-console.log('hello world');
-console.log(test());
-console.log([1, 2, 3].includes(2));
+const Root = () => {
+  return <div>i am root </div>;
+};
+
+ReactDOM.render(<Root />, document.getElementById('root'));
