@@ -1,8 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { hot } from 'react-hot-loader/root'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Home from '@page/Home'
 
-const Root = () => {
-  return <div>i am root </div>;
-};
+const $root = document.getElementById('root')
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+const Root = hot(Home)
+
+ReactDOM.render(<Root />, $root)

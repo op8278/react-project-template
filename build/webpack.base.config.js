@@ -1,4 +1,4 @@
-const { r } = require('./util');
+const { r } = require('./util')
 
 const webpackConfig = {
   // 输出文件
@@ -31,6 +31,7 @@ const webpackConfig = {
       '@dumb': r('../src/compoent/dumb'),
       '@page': r('../src/compoent/page'),
       '@smart': r('../src/compoent/smart'),
+      'react-dom': '@hot-loader/react-dom', // #https://github.com/gaearon/react-hot-loader#react--dom
     },
   },
   // 资源加载loader
@@ -40,9 +41,9 @@ const webpackConfig = {
         test: /\.(jsx|js)$/,
         loader: 'babel-loader',
         exclude: r('../node_modules/'),
-        include: r('../src/index.js'),
+        include: r('../src/'),
       },
     ],
   },
-};
-module.exports = webpackConfig;
+}
+module.exports = webpackConfig

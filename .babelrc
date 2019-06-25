@@ -15,6 +15,7 @@
       {
         "corejs": 3
       }
-    ]
+    ],
+    ["react-hot-loader/babel"]
   ]
 }
