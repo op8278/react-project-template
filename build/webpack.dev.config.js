@@ -14,25 +14,18 @@ const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackBaseConfig = require('./webpack.base.config.js');
-const { r, getStyleLoaders } = require('./util');
-
-// style files regexes
-const cssRegex = /\.css$/;
-const cssModuleRegex = /\.module\.css$/;
-const lessRegex = /\.less$/;
-const lessModuleRegex = /\.module\.less$/;
+const { r, getCSSLoader, getLessLoader } = require('./util');
 
 const webpackConfig = webpackMerge(webpackBaseConfig, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
-  // 入口文件
-  entry: {
-    app: [r('../src/index.js')],
-  },
+
   // 输出文件
   output: {
-    filename: '[name].[hash].js',
+    filename: 'assets/js/[name].js',
+    chunkFilename: 'assets/js/chunk/[name].chunk.js',
   },
+
   // webpack插件
   plugins: [
     new webpack.DefinePlugin({
@@ -67,40 +60,8 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
 });
 
 webpackConfig.module.rules[1]['oneOf'] = [
-  // css的loader
-  {
-    test: cssRegex,
-    exclude: cssModuleRegex,
-    use: getStyleLoaders(
-      {
-        importLoaders: 1,
-        sourceMap: true,
-        modules: true,
-      },
-      null,
-      true
-    ),
-    // Don't consider CSS imports dead code even if the
-    // containing package claims to have no side effects.
-    // Remove this when webpack adds a warning or an error for this.
-    // See https://github.com/webpack/webpack/issues/6571
-    sideEffects: true,
-  },
-  // less的loader
-  {
-    test: lessRegex,
-    exclude: lessModuleRegex,
-    use: getStyleLoaders(
-      {
-        importLoaders: 2,
-        sourceMap: true,
-        modules: true,
-      },
-      'less-loader',
-      true
-    ),
-    sideEffects: true,
-  },
+  getCSSLoader(true), // css的loader
+  getLessLoader(true), // less的loader
 ].concat(webpackConfig.module.rules[1]['oneOf']);
 
 module.exports = webpackConfig;

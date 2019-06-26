@@ -1,11 +1,16 @@
 const { r } = require('./util');
 
 const webpackConfig = {
+  // 入口文件
+  entry: {
+    app: [r('../src/index.js')],
+  },
   // 输出文件
   output: {
     path: r('../dist'),
-    publicPath: '/public/',
+    publicPath: '',
   },
+
   resolve: {
     // 省略后缀
     extensions: [
