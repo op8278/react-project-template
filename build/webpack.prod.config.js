@@ -90,6 +90,36 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
         canPrint: true,
       }),
     ],
+    // #https://webpack.docschina.org/plugins/split-chunks-plugin/
+    splitChunks: {
+      chunks: 'all', // 'async' 异步, 'initial' 内部, 'all' 全部
+      minSize: 30000, // 大于30KB就分隔打包
+      maxSize: 0, // 不限制大小
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      // cacheGroups会继承上面的配置,但是会有自己的单独属性 'test','priority','reuseExistingChunk'
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10, // 优先级,谁数字大,谁优先
+          name: 'vendor',
+        },
+        // 默认规则
+        default: {
+          minChunks: 2,
+          priority: -20, // 优先级
+          reuseExistingChunk: true,
+          name: 'common',
+        },
+      },
+    },
+    // 把 webpack 的 runtime 启动代码单独抽出一个文件
+    runtimeChunk: {
+      name: 'runtime',
+    },
   },
   // webpack插件
   plugins: [
