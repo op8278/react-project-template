@@ -66,7 +66,7 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
   },
 });
 
-webpackConfig.module.rules = webpackConfig.module.rules.concat([
+webpackConfig.module.rules[1]['oneOf'] = [
   // css的loader
   {
     test: cssRegex,
@@ -101,6 +101,6 @@ webpackConfig.module.rules = webpackConfig.module.rules.concat([
     ),
     sideEffects: true,
   },
-]);
+].concat(webpackConfig.module.rules[1]['oneOf']);
 
 module.exports = webpackConfig;
