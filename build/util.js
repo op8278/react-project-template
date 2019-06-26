@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const postcssNormalize = require('postcss-normalize');
 
 /**
  *
@@ -36,31 +35,6 @@ exports.getStyleLoaders = (cssOptions, preProcessor, isEnvDevelopment = true) =>
       // Adds vendor prefixing based on your specified browser support in
       // package.json
       loader: 'postcss-loader',
-      options: {
-        // Necessary for external CSS imports to work
-        // https://github.com/facebook/create-react-app/issues/2677
-        ident: 'postcss',
-        plugins: () => [
-          require('postcss-flexbugs-fixes'),
-          require('postcss-preset-env')({
-            autoprefixer: {
-              flexbox: 'no-2009',
-              browsers: [
-                '>1%',
-                'last 4 versions',
-                'Firefox ESR',
-                'not ie < 9', // React doesn't support IE8 anyway
-              ],
-            },
-            stage: 3,
-          }),
-          // Adds PostCSS Normalize as the reset css with default options,
-          // so that it honors browserslist config in package.json
-          // which in turn let's users customize the target behavior as per their needs.
-          postcssNormalize(),
-        ],
-        sourceMap: true,
-      },
     },
   ].filter(Boolean);
   if (preProcessor) {

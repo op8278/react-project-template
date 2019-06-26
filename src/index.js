@@ -1,10 +1,13 @@
-import { hot } from 'react-hot-loader/root'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Home from '@page/Home'
+import { hot } from 'react-hot-loader/root'; // react-hot-loader 一定要在 react,react-dom前面导入, #https://github.com/gaearon/react-hot-loader#getting-started
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const $root = document.getElementById('root')
+import '@css/index.less'; // 加载全局less
 
-const Root = hot(Home)
+import Home from '@page/Home';
 
-ReactDOM.render(<Root />, $root)
+const $root = document.getElementById('root');
+
+const Root = hot(Home);
+
+ReactDOM.render(<Root />, $root);

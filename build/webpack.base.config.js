@@ -28,6 +28,7 @@ const webpackConfig = {
       '@util': r('../src/common/util'),
       '@api': r('../src/common/api'),
       '@component': r('../src/component'),
+      '@css': r('../src/css'),
       '@dumb': r('../src/component/dumb'),
       '@page': r('../src/component/page'),
       '@smart': r('../src/component/smart'),
