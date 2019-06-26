@@ -51,9 +51,9 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
       errors: true,
     },
     public: 'localhost:3000', // 当使用内联模式(inline mode)并代理 dev-server 时，内联的客户端脚本并不总是知道要连接到什么地方。它会尝试根据 window.location 来猜测服务器的 URL，但是如果失败，你需要使用这个配置。
-    publicPath: '/public/',
+    publicPath: '/',
     historyApiFallback: {
-      index: '/public/index.html',
+      index: 'index.html',
     }, // 404退回首页
     open: true, // 打开浏览器
   },

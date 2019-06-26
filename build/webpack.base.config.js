@@ -8,7 +8,7 @@ const webpackConfig = {
   // 输出文件
   output: {
     path: r('../dist'),
-    publicPath: '',
+    publicPath: '/',
   },
 
   resolve: {
