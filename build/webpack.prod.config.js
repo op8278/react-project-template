@@ -33,6 +33,7 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
   },
   optimization: {
     minimize: true,
+    usedExports: true, // 目的: 辅助 js 的 Tree Shaking
     minimizer: [
       // This is only used in production mode
       new TerserPlugin({
