@@ -62,6 +62,14 @@ const getStyleLoaders = (cssOptions, preProcessor, isEnvDevelopment = true) => {
  * @returns {object} // css-loader的配置
  */
 const getCSSLoader = (isEnvDevelopment = true, isUseModules = true) => {
+  const cssOptions = {};
+
+  if (isUseModules) {
+    cssOptions['modules'] = {
+      localIdentName: 'purify_[hash:base64:5]',
+    };
+  }
+
   return {
     test: cssRegex,
     exclude: cssModuleRegex,
@@ -69,7 +77,7 @@ const getCSSLoader = (isEnvDevelopment = true, isUseModules = true) => {
       {
         importLoaders: 1,
         sourceMap: true,
-        modules: isUseModules,
+        ...cssOptions,
       },
       null,
       isEnvDevelopment
@@ -89,6 +97,13 @@ const getCSSLoader = (isEnvDevelopment = true, isUseModules = true) => {
  * @returns {object} // less-loader的配置
  */
 const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
+  const cssOptions = {};
+
+  if (isUseModules) {
+    cssOptions['modules'] = {
+      localIdentName: 'purify_[hash:base64:5]',
+    };
+  }
   return {
     test: lessRegex,
     exclude: lessModuleRegex,
@@ -96,7 +111,7 @@ const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
       {
         importLoaders: 2,
         sourceMap: true,
-        modules: isUseModules,
+        ...cssOptions,
       },
       'less-loader',
       isEnvDevelopment

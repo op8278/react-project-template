@@ -15,8 +15,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
+const PurifycssWebpack = require('purifycss-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const isWsl = require('is-wsl');
+const glob = require('glob-all');
 
 const webpackBaseConfig = require('./webpack.base.config.js');
 const { r, getCSSLoader, getLessLoader } = require('./util');
@@ -143,11 +145,23 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
         minifyURLs: true,
       },
     }),
+
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: 'assets/css/[name].[contenthash:8].css',
       chunkFilename: 'assets/css/[name].[contenthash:8].chunk.css',
+    }),
+    // CSS Tree Shaking
+    new PurifycssWebpack({
+      styleExtensions: ['.css', '.less'],
+      paths: glob.sync([
+        r('../index.html'), // 请注意，我们同样需要对 html 文件进行 tree shaking
+        r('../src/**/*.js'), // 找到 src 目录下所有 js 文件
+      ]),
+      purifyOptions: {
+        whitelist: ['*purify*'], // 带有 purify 的选择器名字不会被 Tree Shaking, 与 CSS Module 配合时, 请把 CSS Module 名字带有purify关键字
+      },
     }),
   ],
 });
