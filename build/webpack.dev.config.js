@@ -26,6 +26,13 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
     chunkFilename: 'assets/js/chunk/[name].chunk.js',
   },
 
+  resolve: {
+    alias: {
+      // 在开发环境下,用具有 HMR 热替换功能的 @hot-loader/react-dom 替换掉原生的 react-dom
+      'react-dom': '@hot-loader/react-dom', // #https://github.com/gaearon/react-hot-loader#react--dom
+    },
+  },
+
   // webpack插件
   plugins: [
     new webpack.DefinePlugin({

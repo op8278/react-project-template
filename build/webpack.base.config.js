@@ -38,7 +38,6 @@ const webpackConfig = {
       '@dumb': r('../src/component/dumb'),
       '@page': r('../src/component/page'),
       '@smart': r('../src/component/smart'),
-      'react-dom': '@hot-loader/react-dom', // #https://github.com/gaearon/react-hot-loader#react--dom
     },
   },
   // 资源加载loader
