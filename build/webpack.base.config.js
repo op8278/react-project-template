@@ -1,4 +1,22 @@
+const webpack = require('webpack');
+
 const { r } = require('./util');
+
+const plugins = [];
+
+try {
+  // 判断之前是否生成过 dll 文件
+  if (require.resolve('../dll/react.manifest.json')) {
+    plugins.push(
+      new webpack.DllReferencePlugin({
+        context: r('..'),
+        manifest: r('../dll/react.manifest.json'),
+      })
+    );
+  }
+} catch (error) {
+  console.log('未找到 dll/react.manifest.json 文件');
+}
 
 const webpackConfig = {
   // 入口文件
@@ -99,5 +117,7 @@ const webpackConfig = {
       },
     ],
   },
+
+  plugins: [...plugins],
 };
 module.exports = webpackConfig;
