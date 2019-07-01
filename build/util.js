@@ -123,10 +123,23 @@ const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
     sideEffects: true,
   };
 };
+/**
+ *
+ * 获取 autodll-webpack-plugin 的 entry 配置
+ * @param {boolean} isEnvDevelopment // 是否dev开发环境
+ * @returns {object} // autodll-webpack-plugin 的 entry 的配置
+ */
+const getDllEntry = (isEnvDevelopment = true) => {
+  return {
+    // 需要打包成 dll 文件的库列表
+    react: ['react', isEnvDevelopment ? '@hot-loader/react-dom' : 'react-dom'],
+  };
+};
 
 module.exports = {
   r,
   getStyleLoaders,
   getCSSLoader,
   getLessLoader,
+  getDllEntry,
 };

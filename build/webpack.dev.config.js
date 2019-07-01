@@ -12,9 +12,10 @@ process.on('unhandledRejection', err => {
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin');
 
 const webpackBaseConfig = require('./webpack.base.config.js');
-const { r, getCSSLoader, getLessLoader } = require('./util');
+const { r, getCSSLoader, getLessLoader, getDllEntry } = require('./util');
 
 const webpackConfig = webpackMerge(webpackBaseConfig, {
   mode: 'development',
@@ -42,6 +43,14 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
     }),
     new HtmlWebpackPlugin({
       template: r('../index.html'),
+    }),
+    new AutoDllPlugin({
+      context: r('..'),
+      inject: true, // will inject the DLL bundle to index.html
+      debug: true,
+      filename: '[name].[hash:8].dll.js',
+      path: './assets/js/dll',
+      entry: getDllEntry(true),
     }),
     new webpack.HotModuleReplacementPlugin(), // 热替换
   ],

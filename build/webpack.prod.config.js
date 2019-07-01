@@ -21,9 +21,10 @@ const isWsl = require('is-wsl');
 const glob = require('glob-all');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin');
 
 const webpackBaseConfig = require('./webpack.base.config.js');
-const { r, getCSSLoader, getLessLoader } = require('./util');
+const { r, getCSSLoader, getLessLoader, getDllEntry } = require('./util');
 
 const webpackConfig = webpackMerge(webpackBaseConfig, {
   mode: 'production',
@@ -148,11 +149,19 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
         minifyURLs: true,
       },
     }),
-    new AddAssetHtmlPlugin({
-      filepath: r('../dll/*.dll.js'), // 对应的 dll 文件路径
-      outputPath: '/assets/js',
-      publicPath: '/assets/js',
+    new AutoDllPlugin({
+      context: r('..'),
+      inject: true, // will inject the DLL bundle to index.html
+      debug: true,
+      filename: '[name].[hash:8].dll.js',
+      path: './assets/js/dll',
+      entry: getDllEntry(false),
     }),
+    // new AddAssetHtmlPlugin({
+    //   filepath: r('../dll/*.dll.js'), // 对应的 dll 文件路径
+    //   outputPath: '/assets/js',
+    //   publicPath: '/assets/js',
+    // }),
 
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -171,7 +180,7 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
         whitelist: ['*purify*'], // 带有 purify 的选择器名字不会被 Tree Shaking, 与 CSS Module 配合时, 请把 CSS Module 名字带有purify关键字
       },
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
 });
 
