@@ -1,11 +1,15 @@
 const { resolve } = require('path');
+const os = require('os');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
 
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
+
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 }); // 进程池,本机最大 cpu 数 - 1
 
 /**
  *
@@ -135,11 +139,25 @@ const getDllEntry = (isEnvDevelopment = true) => {
     react: ['react', isEnvDevelopment ? '@hot-loader/react-dom' : 'react-dom'],
   };
 };
-
+/**
+ *
+ * 创建 happyPack 的 plugin 配置
+ * @param {string} id // happyPack 定位的 id
+ * @param {array} loaders // loaders
+ * @returns {object}
+ */
+const createHappyPlugin = (id, loaders) => {
+  return new HappyPack({
+    id: id, // id
+    loaders: loaders, // loaders
+    threadPool: happyThreadPool, // 共享进程池
+  });
+};
 module.exports = {
   r,
   getStyleLoaders,
   getCSSLoader,
   getLessLoader,
   getDllEntry,
+  createHappyPlugin,
 };

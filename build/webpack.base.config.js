@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 
-const { r } = require('./util');
+const { r, createHappyPlugin } = require('./util');
 
 const plugins = [];
 
@@ -70,7 +70,7 @@ const webpackConfig = {
           // babel的loader
           {
             test: /\.(jsx|js)$/,
-            loader: 'babel-loader',
+            loader: 'happypack/loader?id=happy-babel',
             exclude: r('../node_modules/'),
             include: r('../src/'),
           },
@@ -118,6 +118,16 @@ const webpackConfig = {
     ],
   },
 
-  plugins: [...plugins],
+  plugins: [
+    createHappyPlugin('happy-babel', [
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true, // 启用缓存
+        },
+      },
+    ]),
+    ...plugins,
+  ],
 };
 module.exports = webpackConfig;
