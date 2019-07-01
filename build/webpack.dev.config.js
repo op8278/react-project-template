@@ -23,7 +23,7 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
 
   // 输出文件
   output: {
-    filename: 'assets/js/[name].js',
+    filename: 'assets/js/[name].js', // 开发环境不计算hash,节省资源
     chunkFilename: 'assets/js/chunk/[name].chunk.js',
   },
 

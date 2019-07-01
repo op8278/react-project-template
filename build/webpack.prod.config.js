@@ -31,12 +31,15 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
 
   // 输出文件
   output: {
-    filename: 'assets/js/[name].[hash:8].js',
+    filename: 'assets/js/[name].[chunkhash:8].js',
     chunkFilename: 'assets/js/chunk/[name].[chunkhash:8].chunk.js',
   },
   optimization: {
     minimize: true,
     usedExports: true, // 目的: 辅助 js 的 Tree Shaking
+    noEmitOnErrors: true, // 当发生错误时,不生成文件
+    moduleIds: 'hashed', // 把默认的 module Id 数字自增加的模式,改为hash算法,保证当一个chunk删除/新增一个模块时,不会影响其他chunk的chunkhash值
+    namedChunks: true,
     minimizer: [
       // This is only used in production mode
       new TerserPlugin({
