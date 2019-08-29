@@ -8,7 +8,8 @@
     "build": "npm run clear && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --mode production",
     "build:dll": "npm run clear:dll && webpack --config build/webpack.dll.config.js",
     "clear": "rimraf dist",
-    "clear:dll": "rimraf dll"
+    "clear:dll": "rimraf dll",
+    "check:type": "tsc"
   },
   "repository": {
     "type": "git",

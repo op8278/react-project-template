@@ -17,7 +17,8 @@
     "noEmit": true,
     "jsx": "react",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@page/*": ["./src/component/page/*"]
     },
     "types": ["./global", "node"]
   },
