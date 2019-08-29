@@ -71,5 +71,12 @@
     "not ie < 9",
     "iOS >= 8",
     "Android >= 4"
-  ]
+  ],
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 120,
+    "trailingComma": "es5"
+  }
 }
