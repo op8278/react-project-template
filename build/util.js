@@ -34,26 +34,26 @@ const getStyleLoaders = (cssOptions, preProcessor, isEnvDevelopment = true) => {
     isEnvDevelopment && 'style-loader',
     !isEnvDevelopment && {
       loader: MiniCssExtractPlugin.loader,
-      options: {},
+      options: {}
     },
     {
       loader: 'css-loader',
-      options: cssOptions,
+      options: cssOptions
     },
     {
       // Options for PostCSS as we reference these options twice
       // Adds vendor prefixing based on your specified browser support in
       // package.json
-      loader: 'postcss-loader',
-    },
+      loader: 'postcss-loader'
+    }
   ].filter(Boolean);
   if (preProcessor) {
     loaders.push({
       loader: preProcessor + '',
       options: {
         sourceMap: true,
-        modules: true,
-      },
+        modules: true
+      }
     });
   }
   return loaders;
@@ -70,7 +70,7 @@ const getCSSLoader = (isEnvDevelopment = true, isUseModules = true) => {
 
   if (isUseModules) {
     cssOptions['modules'] = {
-      localIdentName: 'purify_[hash:base64:5]',
+      localIdentName: 'purify_[hash:base64:5]'
     };
   }
 
@@ -81,7 +81,7 @@ const getCSSLoader = (isEnvDevelopment = true, isUseModules = true) => {
       {
         importLoaders: 1,
         sourceMap: true,
-        ...cssOptions,
+        ...cssOptions
       },
       null,
       isEnvDevelopment
@@ -90,7 +90,7 @@ const getCSSLoader = (isEnvDevelopment = true, isUseModules = true) => {
     // containing package claims to have no side effects.
     // Remove this when webpack adds a warning or an error for this.
     // See https://github.com/webpack/webpack/issues/6571
-    sideEffects: true,
+    sideEffects: true
   };
 };
 /**
@@ -105,7 +105,7 @@ const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
 
   if (isUseModules) {
     cssOptions['modules'] = {
-      localIdentName: 'purify_[hash:base64:5]',
+      localIdentName: 'purify_[hash:base64:5]'
     };
   }
   return {
@@ -115,7 +115,7 @@ const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
       {
         importLoaders: 2,
         sourceMap: true,
-        ...cssOptions,
+        ...cssOptions
       },
       'less-loader',
       isEnvDevelopment
@@ -124,7 +124,7 @@ const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
     // containing package claims to have no side effects.
     // Remove this when webpack adds a warning or an error for this.
     // See https://github.com/webpack/webpack/issues/6571
-    sideEffects: true,
+    sideEffects: true
   };
 };
 /**
@@ -136,7 +136,7 @@ const getLessLoader = (isEnvDevelopment = true, isUseModules = true) => {
 const getDllEntry = (isEnvDevelopment = true) => {
   return {
     // 需要打包成 dll 文件的库列表
-    react: ['react', isEnvDevelopment ? '@hot-loader/react-dom' : 'react-dom'],
+    react: ['react', isEnvDevelopment ? '@hot-loader/react-dom' : 'react-dom']
   };
 };
 /**
@@ -150,7 +150,7 @@ const createHappyPlugin = (id, loaders) => {
   return new HappyPack({
     id: id, // id
     loaders: loaders, // loaders
-    threadPool: happyThreadPool, // 共享进程池
+    threadPool: happyThreadPool // 共享进程池
   });
 };
 module.exports = {
@@ -159,5 +159,5 @@ module.exports = {
   getCSSLoader,
   getLessLoader,
   getDllEntry,
-  createHappyPlugin,
+  createHappyPlugin
 };

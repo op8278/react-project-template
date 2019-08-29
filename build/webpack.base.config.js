@@ -21,29 +21,17 @@ const plugins = [];
 const webpackConfig = {
   // 入口文件
   entry: {
-    app: [r('../src/index.js')],
+    app: [r('../src/index.js')]
   },
   // 输出文件
   output: {
     path: r('../dist'),
-    publicPath: '/',
+    publicPath: '/'
   },
 
   resolve: {
     // 省略后缀
-    extensions: [
-      '.web.mjs',
-      '.mjs',
-      '.web.js',
-      '.js',
-      '.web.ts',
-      '.ts',
-      '.web.tsx',
-      '.tsx',
-      '.json',
-      '.web.jsx',
-      '.jsx',
-    ],
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
 
     // import快捷路径
     alias: {
@@ -55,8 +43,8 @@ const webpackConfig = {
       '@css': r('../src/css'),
       '@dumb': r('../src/component/dumb'),
       '@page': r('../src/component/page'),
-      '@smart': r('../src/component/smart'),
-    },
+      '@smart': r('../src/component/smart')
+    }
   },
   // 资源加载loader
   module: {
@@ -69,10 +57,10 @@ const webpackConfig = {
         oneOf: [
           // babel的loader
           {
-            test: /\.(jsx|js)$/,
+            test: /\.(jsx|js|ts|tsx)$/,
             loader: 'happypack/loader?id=happy-babel',
             exclude: r('../node_modules/'),
-            include: r('../src/'),
+            include: r('../src/')
           },
 
           // "url" loader works like "file" loader except that it embeds assets
@@ -84,8 +72,8 @@ const webpackConfig = {
             options: {
               limit: 10000, // 大小超过limit就抽出来,变成单独的文件,否则就以base64的形式嵌入标签中
               outputPath: 'assets/images',
-              name: '[name].[hash:base64:8].[ext]',
-            },
+              name: '[name].[hash:base64:8].[ext]'
+            }
           },
           // 处理字体文件
           {
@@ -93,8 +81,8 @@ const webpackConfig = {
             loader: 'file-loader',
             options: {
               outputPath: 'assets/fonts',
-              name: '[name].[hash:base64:8].[ext]',
-            },
+              name: '[name].[hash:base64:8].[ext]'
+            }
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
@@ -110,12 +98,12 @@ const webpackConfig = {
             exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
             options: {
               outputPath: 'assets/files',
-              name: '[name].[hash:base64:8].[ext]',
-            },
-          },
-        ],
-      },
-    ],
+              name: '[name].[hash:base64:8].[ext]'
+            }
+          }
+        ]
+      }
+    ]
   },
 
   plugins: [
@@ -123,11 +111,11 @@ const webpackConfig = {
       {
         loader: 'babel-loader',
         options: {
-          cacheDirectory: true, // 启用缓存
-        },
-      },
+          cacheDirectory: true // 启用缓存
+        }
+      }
     ]),
-    ...plugins,
-  ],
+    ...plugins
+  ]
 };
 module.exports = webpackConfig;
