@@ -24,25 +24,25 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
   // 输出文件
   output: {
     filename: 'assets/js/[name].js', // 开发环境不计算hash,节省资源
-    chunkFilename: 'assets/js/chunk/[name].chunk.js'
+    chunkFilename: 'assets/js/chunk/[name].chunk.js',
   },
 
   resolve: {
     alias: {
       // 在开发环境下,用具有 HMR 热替换功能的 @hot-loader/react-dom 替换掉原生的 react-dom
-      'react-dom': '@hot-loader/react-dom' // #https://github.com/gaearon/react-hot-loader#react--dom
-    }
+      'react-dom': '@hot-loader/react-dom', // #https://github.com/gaearon/react-hot-loader#react--dom
+    },
   },
 
   // webpack插件
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
+        NODE_ENV: JSON.stringify('development'),
+      },
     }),
     new HtmlWebpackPlugin({
-      template: r('../index.html')
+      template: r('../index.html'),
     }),
     new AutoDllPlugin({
       context: r('..'),
@@ -50,9 +50,9 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
       debug: true,
       filename: '[name].[hash:8].dll.js',
       path: './assets/js/dll',
-      entry: getDllEntry(true)
+      entry: getDllEntry(true),
     }),
-    new webpack.HotModuleReplacementPlugin() // 热替换
+    new webpack.HotModuleReplacementPlugin(), // 热替换
   ],
   // 开发服务器
   // #https://webpack.js.org/configuration/dev-server/#devserver
@@ -64,20 +64,20 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
     hot: true, // 是否开启热替换(HotModuleRepalce),需要和webpack.HotModuleReplacementPlugin配合
     compress: true, // 开启gzip
     overlay: {
-      errors: true
+      errors: true,
     },
     public: 'localhost:3000', // 当使用内联模式(inline mode)并代理 dev-server 时，内联的客户端脚本并不总是知道要连接到什么地方。它会尝试根据 window.location 来猜测服务器的 URL，但是如果失败，你需要使用这个配置。
     publicPath: '/',
     historyApiFallback: {
-      index: 'index.html'
+      index: 'index.html',
     }, // 404退回首页
-    open: true // 打开浏览器
-  }
+    open: true, // 打开浏览器
+  },
 });
 
 webpackConfig.module.rules[1]['oneOf'] = [
   getCSSLoader(true), // css的loader
-  getLessLoader(true) // less的loader
+  getLessLoader(true), // less的loader
 ].concat(webpackConfig.module.rules[1]['oneOf']);
 
 module.exports = webpackConfig;

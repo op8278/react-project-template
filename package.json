@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --mode development",
-    "build": "npm run clear && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --mode production",
+    "dev:check": "cross-env NODE_ENV=development TYPE_CHECK=1 webpack-dev-server --config build/webpack.dev.config.js --mode development",
+    "build": "npm run check:type && npm run clear && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --mode production",
     "build:dll": "npm run clear:dll && webpack --config build/webpack.dll.config.js",
     "clear": "rimraf dist",
     "clear:dll": "rimraf dll",
@@ -40,6 +41,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^3.0.0",
     "file-loader": "^4.0.0",
+    "fork-ts-checker-webpack-plugin": "^1.5.0",
     "glob-all": "^3.1.0",
     "happypack": "^5.0.1",
     "html-webpack-plugin": "^3.2.0",
