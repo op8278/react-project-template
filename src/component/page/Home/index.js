@@ -5,7 +5,12 @@ import imageBig from '@assets/images/image-big.png';
 import styles from './index.less';
 import test from './test.css';
 
-const Home = () => {
+const Home = props => {
+  // if (true) {
+  //   React.useEffect(() => {
+  //     //
+  //   });
+  // }
   return (
     <div>
       <h1 className={styles.bg}>I am Home Page</h1>
