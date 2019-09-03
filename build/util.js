@@ -9,6 +9,7 @@ const cssModuleRegex = /\.module\.css$/;
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
 
+// eslint-disable-next-line new-cap
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1 }); // 进程池,本机最大 cpu 数 - 1
 
 /**
