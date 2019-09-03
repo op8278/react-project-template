@@ -31,19 +31,7 @@ const webpackConfig = {
 
   resolve: {
     // 省略后缀
-    extensions: [
-      '.web.mjs',
-      '.mjs',
-      '.web.js',
-      '.js',
-      '.web.ts',
-      '.ts',
-      '.web.tsx',
-      '.tsx',
-      '.json',
-      '.web.jsx',
-      '.jsx',
-    ],
+    extensions: ['.js', '.json', '.jsx'],
 
     // import快捷路径
     alias: {

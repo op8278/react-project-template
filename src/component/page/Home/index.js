@@ -11,6 +11,7 @@ const Home = props => {
   //     //
   //   });
   // }
+
   return (
     <div>
       <h1 className={styles.bg}>I am Home Page</h1>

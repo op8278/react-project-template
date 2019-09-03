@@ -33,7 +33,8 @@
     "import/first": "error",
     "import/no-amd": "error",
     "import/no-webpack-loader-syntax": "error",
+    "react/prop-types": 1,
     "no-unused-vars": 1,
-    "react/prop-types": 1
+    "no-debugger": 1
   }
 }
