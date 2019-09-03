@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
@@ -20,6 +21,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const isWsl = require('is-wsl');
 const glob = require('glob-all');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// eslint-disable-next-line no-unused-vars
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const AutoDllPlugin = require('autodll-webpack-plugin');
 
@@ -67,6 +69,7 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
             // https://github.com/terser-js/terser/issues/120
             inline: 2,
             drop_debugger: true, // 去除代码中的debugger
+            // eslint-disable-next-line @typescript-eslint/camelcase
             drop_console: true, // 去除代码中的console
           },
           mangle: {
@@ -77,6 +80,7 @@ const webpackConfig = webpackMerge(webpackBaseConfig, {
             comments: false,
             // Turned on because emoji and regex is not minified properly using default
             // https://github.com/facebook/create-react-app/issues/2488
+            // eslint-disable-next-line @typescript-eslint/camelcase
             ascii_only: true,
           },
         },

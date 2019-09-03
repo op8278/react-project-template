@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+// eslint-disable-next-line no-unused-vars
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const { r } = require('./util');

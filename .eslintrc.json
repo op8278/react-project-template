@@ -5,11 +5,8 @@
     "es6": true,
     "node": true
   },
-  "extends": ["plugin:import/recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier/react"],
-  "plugins": ["import", "react-hooks", "prettier"],
-  "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2019,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -26,6 +23,32 @@
       }
     }
   },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "extends": [
+        "plugin:react/recommended",
+        "plugin:import/recommended",
+        "plugin:prettier/recommended",
+        "prettier/react"
+      ],
+      "plugins": ["import", "react-hooks", "prettier"],
+      "parser": "babel-eslint"
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:import/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
+        "prettier/react"
+      ],
+      "plugins": ["@typescript-eslint", "import", "react-hooks", "prettier"],
+      "parser": "@typescript-eslint/parser"
+    }
+  ],
   "rules": {
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
@@ -34,7 +57,14 @@
     "import/no-amd": "error",
     "import/no-webpack-loader-syntax": "error",
     "react/prop-types": 1,
+    "@typescript-eslint/interface-name-prefix": [
+      2,
+      {
+        "prefixWithI": "always"
+      }
+    ],
     "no-unused-vars": 1,
-    "no-debugger": 1
+    "no-debugger": 1,
+    "camelcase": 1
   }
 }

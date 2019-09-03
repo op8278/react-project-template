@@ -12,7 +12,7 @@
     "clear:dll": "rimraf dll",
     "check:type": "tsc",
     "lint:staged": "lint-staged",
-    "lint": "eslint --ext .js --ext .jsx ./src --fix"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src ./build ./global.d.ts --fix"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,8 @@
     "@hot-loader/react-dom": "^16.8.6",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
     "add-asset-html-webpack-plugin": "^3.1.3",
     "autodll-webpack-plugin": "^0.4.2",
     "babel-eslint": "^10.0.3",
@@ -104,7 +106,12 @@
     "trailingComma": "es5"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "build/**/*.{js,ts}": [
       "eslint --fix",
       "prettier --write",
       "git add"
@@ -112,7 +119,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:staged"
+      "pre-commit": "npm run check:type && npm run lint:staged"
     }
   }
 }

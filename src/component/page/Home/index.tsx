@@ -18,5 +18,4 @@ const Home: React.FC<IProps> = props => {
     </div>
   );
 };
-
 export default Home;
