@@ -56,7 +56,7 @@ const webpackConfig = {
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
-        test: /\.(jsx|js)$/,
+        test: /\.(jsx|js|ts|tsx)$/,
         loader: 'happypack/loader?id=happy-eslint',
         enforce: 'pre',
         exclude: r('../node_modules/'),
@@ -107,7 +107,7 @@ const webpackConfig = {
             // its runtime that would otherwise be processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(js|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
             options: {
               outputPath: 'assets/files',
               name: '[name].[hash:base64:8].[ext]',

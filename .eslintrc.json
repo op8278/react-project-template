@@ -46,7 +46,16 @@
         "prettier/react"
       ],
       "plugins": ["@typescript-eslint", "import", "react-hooks", "prettier"],
-      "parser": "@typescript-eslint/parser"
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "react/prop-types": 0,
+        "@typescript-eslint/interface-name-prefix": [
+          2,
+          {
+            "prefixWithI": "always"
+          }
+        ]
+      }
     }
   ],
   "rules": {
@@ -57,12 +66,6 @@
     "import/no-amd": "error",
     "import/no-webpack-loader-syntax": "error",
     "react/prop-types": 1,
-    "@typescript-eslint/interface-name-prefix": [
-      2,
-      {
-        "prefixWithI": "always"
-      }
-    ],
     "no-unused-vars": 1,
     "no-debugger": 1,
     "camelcase": 1
