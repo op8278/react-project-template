@@ -20,7 +20,7 @@
       "@/*": ["./src/*"],
       "@page/*": ["./src/component/page/*"]
     },
-    "types": ["./global", "node"]
+    "types": ["./global", "node", "@types/jest"]
   },
   "include": ["./src"],
   "exclude": ["node_modules"]
